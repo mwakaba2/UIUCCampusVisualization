@@ -43,9 +43,9 @@ $.getJSON( "data/retrieved_data.json", function( data ) {
       var usr_semesters = parseInt(usr_info["semester"]);
       var usr_transportation = usr_info["transportation"];
       
-      if(containsFilter(colleges, usr_colleges)){
+      if(colleges.compare(usr_colleges)){
         if(semesterRange[0] <= usr_semesters && usr_semesters <= semesterRange[1]){
-          if(containsFilter(transportation, usr_transportation)){
+          if(transportation.compare(usr_transportation)){
             var usr_rectangle = object["rectangle"];
             rectangles.push(usr_rectangle);    
           }
@@ -54,6 +54,21 @@ $.getJSON( "data/retrieved_data.json", function( data ) {
     }
     return rectangles;
    }
+
+
+  /**
+   * Compares two arrays if they have the same values or not 
+   */
+  Array.prototype.compare = function(nextArr) {
+    if (this.length != nextArr.length) return false;
+    for (var i = 0; i < nextArr.length; i++) {
+        if (this[i].compare) { 
+            if (!this[i].compare(nextArr[i])) return false;
+        }
+        if (this[i] !== nextArr[i]) return false;
+    }
+    return true;
+  }
 
 
   /**
