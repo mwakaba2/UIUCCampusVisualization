@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Map UIUC</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/sandstone/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+
+  <!-- Boostrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+  <!-- jQuery Validate Plugin -->
+  <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+  <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
+
+  <!-- JavaScript -->
+  <script type="text/javascript" src="formToWizard.js"></script>
+  <script src="maphomes.js"></script>
+
+  <!-- Firebase -->
+  <script src='https://cdn.firebase.com/js/client/2.1.0/firebase.js'></script>
+
+  <!-- EaselJS -->
+  <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+
+</head>
+<body onload="init();">
+  <div id="warning">
+    Please expand your browser window. If you're on a mobile device, you're going to want to switch to a laptop or desktop.
+  </div>
+  <canvas id="maphomes" width="3675" height="4200"></canvas>
+  <!-- <canvas id="mapplaces" width="3675" height="4200"></canvas> -->
+  <div id="main">
+  </div>
+  <script src="maphomes.js"></script>
+  <script src="mapplaces.js"></script>
+  <script type="text/javascript" src="getLabels.js"></script>
+</body>
+</html>
