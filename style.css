@@ -1,0 +1,39 @@
+@media (max-width: 719px) {
+    #mapplaces,
+    #maphomes,
+    #main {
+        display: none;
+    }
+}
+
+@media (min-width: 720px) {
+    #warning {
+        display: none;
+    }
+}
+
+body {
+  background-color: #111;
+}
+
+#warning {
+    color: #ee3311;
+    font-size: 50px;
+    padding: 5vw;
+}
+
+#main {
+    width: 500px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    overflow: auto;
+    padding:20px;
+    background-color:#f6f6f6;
+}
+
+canvas {
+  margin-right: 500px;
+}
+
