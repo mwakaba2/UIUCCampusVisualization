@@ -4,7 +4,32 @@ $.getJSON( "data/retrieved_data.json", function( data ) {
   var testColleges = ['ENGR'];
   var testSemesterRange = [5, 12];
   var testTransportation = ['bus'];
+  var testKeyword = "Main Quad";
+  
+  /**
+   * Get the labels of rectangles that have the keywords in the label
+   * @param {string} keywords
+   * @return {array of strings} labels 
+   */
+  function searchFilter(keywords) {
+    var labels = [];
+    for(var key in data){
+      var object = data[key];
+      var rectangle = object["rectangle"];
+      var label = rectangle["label"];
 
+      // case insensitive and global matchings
+      var re = new RegExp(keywords,"gi");
+      var matchings = label.match(re);
+      if(matchings){
+        labels.push(label);
+      }
+
+    }
+    return labels;
+  }
+
+  console.log(searchFilter(testKeyword));
   /**
    * Get the labels of rectangles that overlap with the point
    * @param {array of numbers} [x,y] The x and the y coordinate
@@ -27,6 +52,9 @@ $.getJSON( "data/retrieved_data.json", function( data ) {
     return labels;
   }
   
+  // console.log(getLabels(point));
+
+
   /**
    * Get filtered rectangles
    * @param {array of strings} List of colleges 
@@ -71,22 +99,7 @@ $.getJSON( "data/retrieved_data.json", function( data ) {
   }
 
 
-  /**
-   * Return true or false when the user has one of the filtered attributes
-   * @param {array of strings} filters
-   * @param {array of strings} user info
-   * @return {boolean} user_info contains filter
-   */
-   function containsFilter(filters, user_info){
-      for(var i = 0; i < filters.length; i++){
-        if(user_info.indexOf(filters[i]) > -1){
-          return true;
-        }
-      }
-      return false;
-   }
-
-   var testRectangles = filteredRectangles(testColleges, testSemesterRange, testTransportation);
-   console.log(testRectangles);
+   // var testRectangles = filteredRectangles(testColleges, testSemesterRange, testTransportation);
+   // console.log(testRectangles);
 
 });
