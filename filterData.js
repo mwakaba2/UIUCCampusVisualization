@@ -107,12 +107,9 @@
 var retrievedData = [];
 
 $.getJSON( "data/retrieved_data.json", function( data ) {
-  
   for(key in data){
-    var object = data[key];
-    if("label" in object["rectangle"]){
-      retrievedData.push(data[key]); 
-    }
+    var dataObj = data[key];
+    retrievedData.push(dataObj); 
   }
 });
 
@@ -129,11 +126,13 @@ var testKeyword = "Main Quad";
  * @return {array of strings} labels
  */
 function searchFilter(keywords) {
+  clearMap();
   $("#labels-list").empty();
   var rectangles = [];
+  var stop = false;
   for(var key in retrievedData){
-    var object = retrievedData[key];
-    var rectangle = object["rectangle"];
+    var dataObj = retrievedData[key];
+    var rectangle = dataObj["rectangle"];
     var label = rectangle["label"];
     // case insensitive and global matchings
     var re = new RegExp(keywords,"gi");
@@ -156,8 +155,8 @@ function getLabels(point) {
   var pointY = point[1];
   var labels = [];
   for(var key in retrievedData){
-    var object = retrievedData[key];
-    var rectangle = object["rectangle"];
+    var dataObj = retrievedData[key];
+    var rectangle = dataObj["rectangle"];
     var northwest = rectangle["coord"][0];
     var southeast = rectangle["coord"][1];
 
@@ -168,7 +167,10 @@ function getLabels(point) {
   return labels;
 }
 
-// console.log(getLabels(point));
+setTimeout(function () {
+    console.log(getLabels(point));
+  }, 2000);
+
 
 
 /**
@@ -176,9 +178,9 @@ function getLabels(point) {
  * @param {array of strings} List of colleges
  * @param {array of numbers} [start, end] semester range
  * @param {array of strings} List of transportation
- * @return {array of Rectangles} Rectangle objects
+ * @return {array of Rectangles} Rectangle dataObjs
  */
- function filteredRectangles(colleges, semesterRange, transportation) {
+ function filteredRectangles(colleges, semesterRange, transportation, homes) {
   var rectangles = [];
   for(var key in retrievedData){
     var object = retrievedData[key];
@@ -187,13 +189,13 @@ function getLabels(point) {
     var usr_semesters = parseInt(usr_info["semester"]);
     var usr_transportation = usr_info["transportation"];
 
-    if(colleges.compare(usr_colleges)){
+    if(compare(colleges, usr_colleges)){
       if(semesterRange[0] <= usr_semesters && usr_semesters <= semesterRange[1]){
-        if(transportation.compare(usr_transportation)){
+        if(compare(transportation, usr_transportation)){
           var usr_rectangle = object["rectangle"];
           rectangles.push(usr_rectangle);
         }
-      }
+      } 
     }
   }
   return rectangles;
@@ -203,13 +205,13 @@ function getLabels(point) {
 /**
  * Compares two arrays if they have the same values or not
  */
-Array.prototype.compare = function(nextArr) {
-  if (this.length != nextArr.length) return false;
+function compare(currArr, nextArr) {
+  if (currArr.length != nextArr.length) return false;
   for (var i = 0; i < nextArr.length; i++) {
-      if (this[i].compare) {
-          if (!this[i].compare(nextArr[i])) return false;
+      if (currArr[i].compare) {
+          if (!currArr[i].compare(nextArr[i])) return false;
       }
-      if (this[i] !== nextArr[i]) return false;
+      if (currArr[i] !== nextArr[i]) return false;
   }
   return true;
 }
