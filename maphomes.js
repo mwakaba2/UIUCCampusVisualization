@@ -56,13 +56,19 @@ $("#clearhomes").on('click', function() {
 });
 
 $(function() {
+  $("#search").on("keydown", function(e) {
+    if(e.keyCode == 13){
+      var keyword = $("input[name=keyword]").val();
+      var rectangles = searchFilter(keyword);
+    }
+  })
   $( "#slider-range" ).slider({
     range: true,
     min: 0,
     max: 300,
     values: [ 1, 8 ],
     slide: function( event, ui ) {
-      $( "#amount" ).val( ui.values[ 0 ] + " &ndash; " + ui.values[ 1 ] );
+      $( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
     }
   });
   $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +

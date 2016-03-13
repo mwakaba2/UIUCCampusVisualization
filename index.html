@@ -20,6 +20,7 @@
 
   <!-- JavaScript -->
   <script src="maphomes.js"></script>
+  <script src="filterData.js"></script>
 
   <!-- Firebase -->
   <script src='https://cdn.firebase.com/js/client/2.1.0/firebase.js'></script>
@@ -37,7 +38,7 @@
     <!-- Search box -->
     <div id="search">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search">
+        <input type="text" name="keyword" class="form-control" placeholder="Search">
       </div>
     </div>
     <!-- Include which colleges -->
@@ -182,9 +183,12 @@
     <!-- Clear living locations -->
     <div id="locations">
     </div>
+    <!-- Showing List of filtered labels -->
+    <div id="labels-list">
+    </div>
   </div>
   <!-- <script src="maphomes.js"></script> -->
   <!-- <script src="mapplaces.js"></script> -->
-  <script type="text/javascript" src="filterData.js"></script>
+  
 </body>
 </html>
