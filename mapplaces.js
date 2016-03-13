@@ -28,7 +28,7 @@ function init2() {
   stage.addEventListener("stagemousedown", handleMouseDown);
 
   // image = new Image();
-  // image.src = "geometry.png";
+  // image.src = "birdseye.png";
   // bitmap = new createjs.Bitmap(image);
 	// stage.addChild(bitmap);
   stage.update();

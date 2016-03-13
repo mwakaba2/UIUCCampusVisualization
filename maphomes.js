@@ -17,7 +17,7 @@ function init() {
 	stage = new createjs.Stage(canvas);
 
   image = new Image();
-  image.src = "geometry.png";
+  image.src = "birdseye.png";
   bitmap = new createjs.Bitmap(image);
 
   setTimeout(function () {
@@ -53,4 +53,18 @@ $("#clearhomes").on('click', function() {
     toQuad();
   }, 100);
   homes = [];
+});
+
+$(function() {
+  $( "#slider-range" ).slider({
+    range: true,
+    min: 0,
+    max: 300,
+    values: [ 1, 8 ],
+    slide: function( event, ui ) {
+      $( "#amount" ).val( ui.values[ 0 ] + " &ndash; " + ui.values[ 1 ] );
+    }
+  });
+  $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+    " &ndash; " + $( "#slider-range" ).slider( "values", 1 ) );
 });
