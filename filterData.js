@@ -109,11 +109,11 @@ var retrievedData = [];
 $.getJSON( "data/retrieved_data.json", function( data ) {
   
   for(key in data){
-    retrievedData.push(data[key]);
+    var object = data[key];
+    if("label" in object["rectangle"]){
+      retrievedData.push(data[key]); 
+    }
   }
-
-   // var testRectangles = filteredRectangles(testColleges, testSemesterRange, testTransportation);
-   // console.log(testRectangles);
 });
 
 var point = [1750, 925];
@@ -135,7 +135,6 @@ function searchFilter(keywords) {
     var object = retrievedData[key];
     var rectangle = object["rectangle"];
     var label = rectangle["label"];
-
     // case insensitive and global matchings
     var re = new RegExp(keywords,"gi");
     var matchings = label.match(re);
@@ -143,7 +142,6 @@ function searchFilter(keywords) {
       $("#labels-list").append("<li>"+label+"</li>");
       rectangles.push(rectangle);
     }
-
   }
   return rectangles;
 }
@@ -157,8 +155,8 @@ function getLabels(point) {
   var pointX = point[0];
   var pointY = point[1];
   var labels = [];
-  for(var key in data){
-    var object = data[key];
+  for(var key in retrievedData){
+    var object = retrievedData[key];
     var rectangle = object["rectangle"];
     var northwest = rectangle["coord"][0];
     var southeast = rectangle["coord"][1];
@@ -182,8 +180,8 @@ function getLabels(point) {
  */
  function filteredRectangles(colleges, semesterRange, transportation) {
   var rectangles = [];
-  for(var key in data){
-    var object = data[key];
+  for(var key in retrievedData){
+    var object = retrievedData[key];
     var usr_info = object["user_info"];
     var usr_colleges = usr_info["college"];
     var usr_semesters = parseInt(usr_info["semester"]);

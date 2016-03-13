@@ -1,5 +1,4 @@
 var canvas, stage, image, bitmap;
-
 var homes = [];
 
 function toQuad() {
@@ -60,6 +59,23 @@ $(function() {
     if(e.keyCode == 13){
       var keyword = $("input[name=keyword]").val();
       var rectangles = searchFilter(keyword);
+      console.log(rectangles);
+      for(var rectangle in rectangles){
+        var northwest = rectangle[coord][0];
+        var southeast = rectangle[coord][1];
+        var topX = northwest[0];
+        var topY = northwest[1];
+        var botX = southeast[0];
+        var botY = southeast[1];
+        var g = new createjs.Graphics(createjs.Graphics.getRGB(212,93,0, 0.3));
+        g.beginFill();
+        g.drawRect(topX, topY, botX - topX, botY - topY);
+
+        var s = new createjs.Shape(g);
+
+        stage.addChild(s);
+        stage.update();
+      }
     }
   })
   $( "#slider-range" ).slider({
