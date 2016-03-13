@@ -3,8 +3,7 @@ var homes = [];
 
 var places = [];
 var topX, topY, botX, botY, label;
-
-
+var sliderRange = [1, 8];
 function handleMouseDown(event) {
   topX = stage.mouseX;
   topY = stage.mouseY;
@@ -141,14 +140,35 @@ $(function() {
   $( "#slider-range" ).slider({
     range: true,
     min: 0,
-    max: 300,
+    max: 99,
     values: [ 1, 8 ],
     slide: function( event, ui ) {
       $( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      sliderRange[0] = ui.values[ 0 ];
+      sliderRange[1] = ui.values[ 1 ];
+      var colleges = $('input[type="checkbox"][name="colleges"]:checked').map(function(){
+        return this.value;
+      }).toArray();
+      var vehicles = $('input[type="checkbox"][name="vehicles"]:checked').map(function(){
+        return this.value;
+      }).toArray();
+      console.log(colleges, sliderRange, vehicles);
+      filteredRectangles(colleges, sliderRange, vehicles, homes);
     }
   });
   $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +
     " - " + $( "#slider-range" ).slider( "values", 1 ) );
 
-  
+  $('input[type="checkbox"][name="colleges"], input[type="checkbox"][name="vehicles"]').on('change',function(){
+    var colleges = $('input[type="checkbox"][name="colleges"]:checked').map(function(){
+      return this.value;
+    }).toArray();
+    var vehicles = $('input[type="checkbox"][name="vehicles"]:checked').map(function(){
+      return this.value;
+    }).toArray();
+
+    console.log(colleges, sliderRange, vehicles);
+    filteredRectangles(colleges, sliderRange, vehicles, homes);
+  });
+
 });

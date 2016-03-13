@@ -198,14 +198,13 @@ function getLabels(point) {
   var pointY = point[1];
   var labels = [];
   var count_dict = {}
-  
   for(var key in retrievedData){
     var dataObj = retrievedData[key];
     var rectangle = dataObj["rectangle"];
     var northwest = rectangle["coord"][0];
     var southeast = rectangle["coord"][1];
     // console.log("HERE");
-
+      
 
     if(northwest[0] < pointX && pointX < southeast[0] && northwest[1] < pointY && pointY < southeast[1]){
       label = rectangle["label"]
@@ -220,18 +219,13 @@ function getLabels(point) {
     }
   }
 
-  console.log("get label");
-  console.log(count_dict);
-  console.log(labels);
-
   getAggregate(count_dict)
-
   return labels;
 }
 
-setTimeout(function () {
-    console.log(getLabels(point));
-  }, 2000);
+// setTimeout(function () {
+//     console.log(getLabels(point));
+//   }, 2000);
 
 /**
  * Get filtered rectangles
@@ -242,22 +236,30 @@ setTimeout(function () {
  */
  function filteredRectangles(colleges, semesterRange, transportation, homes) {
   var rectangles = [];
+  count_dict = {}
   for(var key in retrievedData){
-    var object = retrievedData[key];
-    var usr_info = object["user_info"];
+    // console.log("In for")
+    var dataObj = retrievedData[key];
+    var usr_info = dataObj["user_info"];
     var usr_colleges = usr_info["college"];
     var usr_semesters = parseInt(usr_info["semester"]);
     var usr_transportation = usr_info["transportation"];
 
-    if(compare(colleges, usr_colleges)){
+    if(isSameSet(colleges, usr_colleges)){
       if(semesterRange[0] <= usr_semesters && usr_semesters <= semesterRange[1]){
-        if(compare(transportation, usr_transportation)){
-          var usr_rectangle = object["rectangle"];
+        if(isSameSet(transportation, usr_transportation)){
+          var usr_rectangle = dataObj["rectangle"];
+          var label = usr_rectangle["label"];
           rectangles.push(usr_rectangle);
+          if(!(label in count_dict))
+            count_dict[label] = 1;
+          else
+            count_dict[label] += 1; 
         }
       } 
     }
   }
+  getAggregate(count_dict);
   return rectangles;
  }
 
@@ -265,13 +267,6 @@ setTimeout(function () {
 /**
  * Compares two arrays if they have the same values or not
  */
-function compare(currArr, nextArr) {
-  if (currArr.length != nextArr.length) return false;
-  for (var i = 0; i < nextArr.length; i++) {
-      if (currArr[i].compare) {
-          if (!currArr[i].compare(nextArr[i])) return false;
-      }
-      if (currArr[i] !== nextArr[i]) return false;
-  }
-  return true;
+var isSameSet = function(arr1, arr2){
+  return  $(arr1).not(arr2).length === 0 && $(arr2).not(arr1).length === 0;  
 }
