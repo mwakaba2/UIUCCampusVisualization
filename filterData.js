@@ -124,25 +124,70 @@ var testTransportation = ['bus'];
 var testKeyword = "Main Quad";
 
 /**
+ * Get the aggregated labels of rectangles that have the keywords in the label
+ * And post to labels-list
+ * @param {string: int} dictionary of the count of each word
+ * @return None 
+ */
+
+function getAggregate(count_dict){
+  $("#labels-list").empty();
+  var tuples = [];
+  for (var key in count_dict) tuples.push([key, count_dict[key]]);
+
+  tuples.sort(function(a, b) {
+    a = a[1];
+    b = b[1];
+    return a > b ? -1 : (a < b ? 1 : 0);
+  });
+
+  for (var i = 0; i < tuples.length; i++) {
+    var key = tuples[i][0];
+    var value = tuples[i][1];
+    // console.log(key + ": " + value)
+    $("#labels-list").append("<li>"+ key + ": " + value+"</li>");
+  }
+}
+
+
+
+/**
  * Get the labels of rectangles that have the keywords in the label
  * @param {string} keywords
  * @return {array of strings} labels
  */
 function searchFilter(keywords) {
-  $("#labels-list").empty();
+  // $("#labels-list").empty();
   var rectangles = [];
+  count_dict = {}
   for(var key in retrievedData){
     var object = retrievedData[key];
     var rectangle = object["rectangle"];
+    
+    if(rectangle == undefined){
+      break;
+    }
     var label = rectangle["label"];
+
+    // console.log("Here....." + object)
+
     // case insensitive and global matchings
     var re = new RegExp(keywords,"gi");
     var matchings = label.match(re);
     if(matchings){
-      $("#labels-list").append("<li>"+label+"</li>");
+      label = label.toLowerCase()
+      if(!(label in count_dict))
+        count_dict[label] = 1
+      else
+        count_dict[label] += 1 
+      // $("#labels-list").append("<li>"+label+"</li>");
       rectangles.push(rectangle);
     }
   }
+
+  getAggregate(count_dict)
+  
+  
   return rectangles;
 }
 
@@ -155,20 +200,40 @@ function getLabels(point) {
   var pointX = point[0];
   var pointY = point[1];
   var labels = [];
+  var count_dict = {}
+  
   for(var key in retrievedData){
     var object = retrievedData[key];
     var rectangle = object["rectangle"];
     var northwest = rectangle["coord"][0];
     var southeast = rectangle["coord"][1];
+    // console.log("HERE");
+
 
     if(northwest[0] < pointX && pointX < southeast[0] && northwest[1] < pointY && pointY < southeast[1]){
-      labels.push(rectangle["label"]);
+      label = rectangle["label"]
+      // console.log("HERE" + label);
+
+      labels.push(label);
+      
+      if(!(label in count_dict))
+        count_dict[label] = 1
+      else
+        count_dict[label] += 1 
     }
   }
+
+  console.log("get label");
+  console.log(count_dict);
+  console.log(labels);
+
+  getAggregate(count_dict)
+
   return labels;
 }
-
-// console.log(getLabels(point));
+setTimeout(function (){
+  console.log(getLabels(point));
+}, 2000);
 
 
 /**
