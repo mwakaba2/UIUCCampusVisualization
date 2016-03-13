@@ -7,18 +7,16 @@
   <title>Map UIUC</title>
 
   <!-- Styles -->
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/sandstone/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="style.css">
 
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
   <!-- Boostrap JS -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-  <!-- jQuery Validate Plugin -->
-  <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
-  <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 
   <!-- JavaScript -->
   <script src="maphomes.js"></script>
@@ -35,11 +33,114 @@
     Please expand your browser window. If you're on a mobile device, you're going to want to switch to a laptop or desktop.
   </div>
   <canvas id="maphomes" width="3675" height="4200"></canvas>
-  <!-- <canvas id="mapplaces" width="3675" height="4200"></canvas> -->
   <div id="main">
+    <!-- Search box -->
+    <div id="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
+    </div>
+    <!-- Include which colleges -->
+    <div id="colleges">
+      <div class="col-xs-4">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="colleges" value="ACES"> ACES
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="colleges" value="AHS"> AHS
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="colleges" value="BUS"> BUS
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="colleges" value="DGS"> DGS
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="colleges" value="EDUC"> EDUC
+          </label>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="colleges" value="ENGR"> ENGR
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="colleges" value="FAA"> FAA
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="colleges" value="LAS"> LAS
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="colleges" value="LAW"> LAW
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="colleges" value="LER"> LER
+          </label>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="colleges" value="LIS"> LIS
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="colleges" value="MDIA"> MDIA
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="colleges" value="MEDC"> MEDC
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="colleges" value="SOCW"> SOCW
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="colleges" value="none"> none
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- Set range of semesters -->
+    <div id="semesters">
+      <p>
+        <label for="amount">Price range:</label>
+        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+      </p>
+      <div id="slider-range"></div>
+    </div>
+    <!-- Include which vehicles -->
+    <div id="vehicles">
+    </div>
+    <!-- Clear living locations -->
+    <div id="locations">
+    </div>
   </div>
-  <script src="maphomes.js"></script>
-  <script src="mapplaces.js"></script>
+  <!-- <script src="maphomes.js"></script> -->
+  <!-- <script src="mapplaces.js"></script> -->
   <script type="text/javascript" src="filterData.js"></script>
 </body>
 </html>
