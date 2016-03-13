@@ -66,5 +66,5 @@ $(function() {
     }
   });
   $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +
-    " &ndash; " + $( "#slider-range" ).slider( "values", 1 ) );
+    " - " + $( "#slider-range" ).slider( "values", 1 ) );
 });
