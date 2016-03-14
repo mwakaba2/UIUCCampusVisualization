@@ -114,6 +114,27 @@ $(function() {
     });
 });
 
+function drawRectangles(rectangles){
+  clearMap();
+  var alpha = 0.99/rectangles.length;
+  for(var i in rectangles){
+    var rectangle = rectangles[i];
+    var northwest = rectangle["coord"][0];
+    var southeast = rectangle["coord"][1];
+    var topX = northwest[0];
+    var topY = northwest[1];
+    var botX = southeast[0];
+    var botY = southeast[1];
+
+    var g = new createjs.Graphics();
+    g.beginFill(createjs.Graphics.getRGB(96,110,178,alpha));
+    g.drawRect(topX, topY, botX - topX, botY - topY);
+
+    var s = new createjs.Shape(g);
+    stage.addChild(s);
+  }
+  stage.update();
+}
 
 
 $(function() {
@@ -121,25 +142,8 @@ $(function() {
     if(e.keyCode == 13){
       var keyword = $("input[name=keyword]").val();
       var rectangles = searchFilter(keyword);
-      var alpha = 0.99/rectangles.length;
-      for(var i in rectangles){
-        var rectangle = rectangles[i];
-        var northwest = rectangle["coord"][0];
-        var southeast = rectangle["coord"][1];
-        var topX = northwest[0];
-        var topY = northwest[1];
-        var botX = southeast[0];
-        var botY = southeast[1];
-
-        var g = new createjs.Graphics();
-        g.beginFill(createjs.Graphics.getRGB(96,110,178,alpha));
-        g.drawRect(topX, topY, botX - topX, botY - topY);
-
-        var s = new createjs.Shape(g);
-        stage.addChild(s);
-      }
+      drawRectangles(rectangles);
     }
-    stage.update();
   })
   $( "#slider-range" ).slider({
     range: true,
@@ -167,7 +171,8 @@ $(function() {
         return this.value;
       }).toArray();
       console.log(colleges, sliderRange, vehicles);
-      filteredRectangles(colleges, sliderRange, vehicles, homes);
+      var rectangles = filteredRectangles(colleges, sliderRange, vehicles, homes);
+      drawRectangles(rectangles);
     }
   });
   $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +
@@ -182,7 +187,8 @@ $(function() {
     }).toArray();
 
     console.log(colleges, sliderRange, vehicles);
-    filteredRectangles(colleges, sliderRange, vehicles, homes);
+    var rectangles = filteredRectangles(colleges, sliderRange, vehicles, homes);
+    drawRectangles(rectangles);
   });
 
 });
