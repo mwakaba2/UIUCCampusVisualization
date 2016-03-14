@@ -105,9 +105,13 @@ function clearMap(){
   stage.update();
 }
 
-$("#clearhomes").on('click', function() {
-  // TODO: 
-  
+$(function() {
+  $( "#clearhomes" )
+    .button()
+    .click(function() {
+      // TODO
+      console.log("click");
+    });
 });
 
 
@@ -126,7 +130,7 @@ $(function() {
         var topY = northwest[1];
         var botX = southeast[0];
         var botY = southeast[1];
-        
+
         var g = new createjs.Graphics();
         g.beginFill(createjs.Graphics.getRGB(96,110,178,alpha));
         g.drawRect(topX, topY, botX - topX, botY - topY);
@@ -143,7 +147,17 @@ $(function() {
     max: 99,
     values: [ 1, 8 ],
     slide: function( event, ui ) {
-      $( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      if (ui.values[0] === ui.values[1]) {
+        if (ui.values[0] === 1) {
+          $( "#amount" ).html( ui.values[ 0 ] + " semester");
+        } else if (ui.values[0] === 0) {
+          $( "#amount" ).html( "never lived in the area");
+        } else {
+          $( "#amount" ).html( ui.values[ 0 ] + " semesters");
+        }
+      } else {
+        $( "#amount" ).html( ui.values[ 0 ] + "–" + ui.values[ 1 ] + " semesters");
+      }
       sliderRange[0] = ui.values[ 0 ];
       sliderRange[1] = ui.values[ 1 ];
       var colleges = $('input[type="checkbox"][name="colleges"]:checked').map(function(){
