@@ -185,7 +185,6 @@ $(function() {
       return this.value;
     }).toArray();
 
-    console.log(colleges, sliderRange, vehicles, homes);
     var rectangles = filteredRectangles(colleges, sliderRange, vehicles, homes);
     drawRectangles(rectangles);
   });
