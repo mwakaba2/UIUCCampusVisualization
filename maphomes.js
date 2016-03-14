@@ -110,7 +110,6 @@ $(function() {
     .button()
     .click(function() {
       // TODO
-      clearMap();
     });
 });
 
@@ -185,6 +184,7 @@ $(function() {
       return this.value;
     }).toArray();
 
+    console.log(homes);
     var rectangles = filteredRectangles(colleges, sliderRange, vehicles, homes);
     drawRectangles(rectangles);
   });

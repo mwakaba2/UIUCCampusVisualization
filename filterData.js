@@ -143,6 +143,21 @@ function getLabels(point) {
       }
     }
   }
+  if(homes.length > 0){
+    for(var rect in rectangles){
+      var coords = rectangles[rec]["coord"];
+      var northwest = coords[0];
+      var southeast = coords[1];
+      for(var h in homes){
+        var hNW = homes[h][0];
+        var nSE = homes[h][1];
+        var overlapping = northwest[1] > hNW[1] && hNW[1] > southeast[1] || northwest[1] < hNW[1] && hSE[1] < northwest[1];
+        if(!overlapping){
+          rectangles.splice(rect, 1);
+        }
+      }
+    }
+  }
   getAggregate(count_dict);
   return rectangles;
  }
