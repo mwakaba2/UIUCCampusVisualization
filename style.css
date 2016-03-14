@@ -28,12 +28,54 @@ body {
     position: fixed;
     top: 0;
     right: 0;
-    overflow: auto;
-    padding:20px;
-    background-color:#f6f6f6;
 }
 
 canvas {
   margin-right: 500px;
 }
 
+.help-block {
+  padding-top: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #fff;
+  margin-top: 15px
+}
+
+#homeareas {
+  margin-bottom: 30px;
+}
+
+#filters,
+#labels-list {
+  height: 50vh;
+  overflow: auto;
+  padding: 20px;
+}
+
+#filters > div,
+#labels-list > div {
+  width: 460px;
+}
+
+#filters {
+  background-color: hsl(230, 50%, 90%);
+}
+
+#labels-list {
+  background-color: hsl(30, 50%, 90%);
+}
+
+a {
+  color: hsl(230, 90%, 50%)
+}
+
+a:hover {
+  color: hsl(230, 70%, 70%)
+}
+
+#labels-list li {
+  list-style: none;
+  padding: 5px;
+  line-height: 1.2em;
+}

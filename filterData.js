@@ -109,7 +109,7 @@ var retrievedData = [];
 $.getJSON( "data/retrieved_data.json", function( data ) {
   for(key in data){
     var dataObj = data[key];
-    retrievedData.push(dataObj); 
+    retrievedData.push(dataObj);
   }
 });
 
@@ -124,7 +124,7 @@ var testKeyword = "Main Quad";
  * Get the aggregated labels of rectangles that have the keywords in the label
  * And post to labels-list
  * @param {string: int} dictionary of the count of each word
- * @return None 
+ * @return None
  */
 
 function getAggregate(count_dict){
@@ -142,7 +142,7 @@ function getAggregate(count_dict){
     var key = tuples[i][0];
     var value = tuples[i][1];
     // console.log(key + ": " + value)
-    $("#labels-list").append("<li>"+ key + ": " + value+"</li>");
+    $("#labels-list").append("<li>"+ key + " <span class=\"badge\">" + value +"</span></li>");
   }
 }
 
@@ -160,7 +160,7 @@ function searchFilter(keywords) {
   for(var key in retrievedData){
     var object = retrievedData[key];
     var rectangle = object["rectangle"];
-    
+
     if(rectangle == undefined){
       break;
     }
@@ -176,15 +176,15 @@ function searchFilter(keywords) {
       if(!(label in count_dict))
         count_dict[label] = 1
       else
-        count_dict[label] += 1 
+        count_dict[label] += 1
       // $("#labels-list").append("<li>"+label+"</li>");
       rectangles.push(rectangle);
     }
   }
 
   getAggregate(count_dict)
-  
-  
+
+
   return rectangles;
 }
 
@@ -204,18 +204,18 @@ function getLabels(point) {
     var northwest = rectangle["coord"][0];
     var southeast = rectangle["coord"][1];
     // console.log("HERE");
-      
+
 
     if(northwest[0] < pointX && pointX < southeast[0] && northwest[1] < pointY && pointY < southeast[1]){
       label = rectangle["label"]
       // console.log("HERE" + label);
 
       labels.push(label);
-      
+
       if(!(label in count_dict))
         count_dict[label] = 1
       else
-        count_dict[label] += 1 
+        count_dict[label] += 1
     }
   }
 
@@ -254,9 +254,9 @@ function getLabels(point) {
           if(!(label in count_dict))
             count_dict[label] = 1;
           else
-            count_dict[label] += 1; 
+            count_dict[label] += 1;
         }
-      } 
+      }
     }
   }
   getAggregate(count_dict);
@@ -268,5 +268,5 @@ function getLabels(point) {
  * Compares two arrays if they have the same values or not
  */
 var isSameSet = function(arr1, arr2){
-  return  $(arr1).not(arr2).length === 0 && $(arr2).not(arr1).length === 0;  
+  return  $(arr1).not(arr2).length === 0 && $(arr2).not(arr1).length === 0;
 }
