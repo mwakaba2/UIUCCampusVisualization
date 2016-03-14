@@ -20,6 +20,7 @@
 
   <!-- JavaScript -->
   <script src="maphomes.js"></script>
+  <script src="filterData.js"></script>
 
   <!-- Firebase -->
   <script src='https://cdn.firebase.com/js/client/2.1.0/firebase.js'></script>
@@ -37,7 +38,7 @@
     <!-- Search box -->
     <div id="search">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search">
+        <input type="text" name="keyword" class="form-control" placeholder="Search">
       </div>
     </div>
     <!-- Include which colleges -->
@@ -127,20 +128,72 @@
     <!-- Set range of semesters -->
     <div id="semesters">
       <p>
-        <label for="amount">Price range:</label>
+        <label for="amount">Semester range:</label>
         <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
       </p>
       <div id="slider-range"></div>
     </div>
     <!-- Include which vehicles -->
     <div id="vehicles">
+      <div class="col-xs-6">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="vehicles" value="skates"> skates
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="vehicles" value="board/scooter"> board/scooter
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="vehicles" value="wheelchair"> wheelchair
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="vehicles" value="powerchair"> powerchair
+          </label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="vehicles" value="bicycle"> bicycle
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="vehicles" value="motorcycle"> motorcycle
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="vehicles" value="car"> car
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="vehicles" value="bus"> bus
+          </label>
+        </div>
+      </div>
     </div>
     <!-- Clear living locations -->
     <div id="locations">
+      <legend>Living locations</legend>
+      <p>Click and drag to mark a rectangular area on the map to filter data.</p>
+      <a href='#' class="btn btn-default" id="clearhomes">
+        Clear locations
+      </a>
+    </div>
+    <!-- Showing List of filtered labels -->
+    <div id="labels-list">
     </div>
   </div>
   <!-- <script src="maphomes.js"></script> -->
   <!-- <script src="mapplaces.js"></script> -->
-  <script type="text/javascript" src="filterData.js"></script>
+  
 </body>
 </html>
