@@ -110,7 +110,7 @@ $(function() {
     .button()
     .click(function() {
       // TODO
-      console.log("click");
+      clearMap();
     });
 });
 
@@ -170,7 +170,6 @@ $(function() {
       var vehicles = $('input[type="checkbox"][name="vehicles"]:checked').map(function(){
         return this.value;
       }).toArray();
-      console.log(colleges, sliderRange, vehicles);
       var rectangles = filteredRectangles(colleges, sliderRange, vehicles, homes);
       drawRectangles(rectangles);
     }
@@ -186,7 +185,7 @@ $(function() {
       return this.value;
     }).toArray();
 
-    console.log(colleges, sliderRange, vehicles);
+    console.log(colleges, sliderRange, vehicles, homes);
     var rectangles = filteredRectangles(colleges, sliderRange, vehicles, homes);
     drawRectangles(rectangles);
   });
