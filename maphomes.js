@@ -11,6 +11,7 @@ function handleMouseDown(event) {
   botY = stage.mouseY;
 
   stage.removeAllEventListeners("stagemousedown");
+  stage.addEventListener("stagemousedown", handleClick);
   stage.addEventListener("stagemouseup", handleMouseUp);
 }
 
@@ -46,6 +47,7 @@ function handleMouseUp(event) {
   }
 
   stage.removeAllEventListeners("stagemouseup");
+  stage.addEventListener("stagemousedown", handleClick);
   stage.addEventListener("stagemousedown", handleMouseDown);
 }
 
@@ -77,25 +79,17 @@ function init() {
 
   stage.removeAllEventListeners();
   stage.addEventListener("stagemousedown", handleMouseDown);
+  stage.addEventListener("stagemousedown", handleClick);
   stage.update();
 
 }
 
 function handleClick(event) {
-  var g = new createjs.Graphics();
-  g.beginFill(createjs.Graphics.getRGB(212,93,0,0.3));
-  g.drawCircle(0,0,30);
-
-  var s = new createjs.Shape(g);
-  s.x = stage.mouseX;
-  s.y = stage.mouseY;
-
-  homes.push([stage.mouseX, stage.mouseY]);
-
-  console.log(homes);
-
-  stage.addChild(s);
-  stage.update();
+  var point = [];
+  point[0] = stage.mouseX;
+  point[1] = stage.mouseY;
+  console.log(point);
+  getLabels(point);
 }
 
 function clearMap(){
