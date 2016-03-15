@@ -12,7 +12,7 @@ var toggle = "nothing";
 function init() {
   toQuad();
 
-  alpha = 0.5;
+  alpha = 0.37;
   alphamask = document.getElementById("alphamask");
   alphastage = new createjs.Stage(alphamask);
 
@@ -108,14 +108,13 @@ $(function() {
 
   /* alpha slider */
   $( "#alpha-range" ).slider({
-    min: 0,
-    max: 3,
+    min: 0.55,
+    max: 2.95,
     value: 1,
-    step: 0.1,
+    step: 0.04,
     slide: function( event, ui ) {
-
       alpha = (ui.value) * (ui.value) * (ui.value) / 27;
-      console.log(alpha);
+
       recalculate();
     }
   });
@@ -217,9 +216,6 @@ $(function() {
         $("#living").removeClass("current");
         $("#living").html("Home filter");
         $("#nothing").addClass("current");
-        clearMap();
-        point = [];
-        homes = [];
         recalculate();
         stage.removeAllEventListeners("stagemousedown");
       }
@@ -269,7 +265,7 @@ function drawFilter() {
 
   if (point.length > 0) {
     var g = new createjs.Graphics();
-    g.beginFill("rgba(255,0,0,0.8)");
+    g.beginFill("rgba(255,55,0,0.8)");
     g.drawCircle(point[0], point[1], 15);
     var s = new createjs.Shape(g);
     point_container.addChild(s);
@@ -286,7 +282,7 @@ function drawFilter() {
       var botY = southeast[1];
 
       var s = new createjs.Shape();
-      s.graphics.beginFill("rgba(255,0,0,0.4)");
+      s.graphics.beginFill("rgba(255,55,0,0.4)");
       s.graphics.drawRect(topX, topY, botX - topX, botY - topY);
       homes_container.addChild(s);
     }
