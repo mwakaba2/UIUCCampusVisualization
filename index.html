@@ -18,6 +18,9 @@
   <!-- Boostrap JS -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
+  <!-- Underscore -->
+  <script src="http://underscorejs.org/underscore-min.js"></script>
+
   <!-- JavaScript -->
   <script src="maphomes.js"></script>
   <script src="filterData.js"></script>
@@ -34,6 +37,7 @@
     Please expand your browser window. If you're on a mobile device, you're going to want to switch to a laptop or desktop.
   </div>
   <canvas id="maphomes" width="3675" height="4200"></canvas>
+  <canvas id="alphamask" width="3675" height="4200"></canvas>
   <div id="main">
     <div id="filters">
       <div id="intro">
@@ -44,6 +48,13 @@
           You can filter the labels using the inputs below. None of the filters are required.
         </p>
       </div>
+      <!-- Set alpha -->
+      <div id="alpha">
+        <p class="help-block">
+          Adjust brightness of data.
+        </p>
+        <div id="alpha-range"></div>
+      </div>
       <!-- Search box -->
       <div id="search">
         <p class="help-block">
@@ -53,15 +64,18 @@
           <input type="text" name="keyword" class="form-control" placeholder="Search">
         </div>
       </div>
-      <div id="point">
+      <div id="cursor">
         <p class="help-block">
-          After clicking on DESIGNATE POINT, click and drag on the map to designate a point. Labels will be filtered by those touching that point. You can only designate one point.
+          Click on a button below to change input modes.
         </p>
-        <button class="btn btn-default" id="drawpoint">
-          Designate point
+        <button class="btn btn-default" id="examine">
+          Examine point
         </button>
-        <button class="btn btn-default" id="clearpoint">
-          Clear point
+        <button class="btn btn-default" id="living">
+          Home filter
+        </button>
+        <button class="btn btn-default" id="nothing">
+          None
         </button>
       </div>
       <!-- Include which colleges -->
@@ -224,18 +238,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <!-- Clear living locations -->
-      <div id="homeareas">
-        <p class="help-block">
-          After clicking on DRAW HOME AREA, click and drag on the map to create a rectangle. Labels will be filtered by people who have lived in that area. You can draw multiple rectangles.
-        </p>
-        <button class="btn btn-default" id="drawhomes">
-          Draw home area
-        </button>
-        <button class="btn btn-default" id="clearhomes">
-          Clear home areas
-        </button>
       </div>
     </div>
     <!-- Showing List of filtered labels -->
